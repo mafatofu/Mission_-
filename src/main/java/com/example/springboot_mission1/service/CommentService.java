@@ -1,5 +1,6 @@
 package com.example.springboot_mission1.service;
 
+import com.example.springboot_mission1.entity.Article;
 import com.example.springboot_mission1.entity.Comment;
 import com.example.springboot_mission1.repo.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +20,22 @@ public class CommentService {
         //return optionalCommentList.orElse(null);
         return optionalCommentList.stream().toList();
     }
+
+    public Comment showComment(Long commentId){
+        return repository.findById(commentId).orElse(null);
+    }
+
     //댓글추가
+    public void createComment(Article article, String contents, String createCommentPwd){
+        Comment comment = new Comment();
+        comment.setArticle(article);
+        comment.setContents(contents);
+        comment.setPassword(createCommentPwd);
+
+        repository.save(comment);
+    }
     //댓글삭제
     public void deleteComments(Long articleId){
-        //delete from article_comment_list where article_id=?
-        //repository.deleteAllByArticleId(articleId);
-
-        //repository.deleteCommentByArticleId(articleId);
+        repository.deleteById(articleId);
     }
 }

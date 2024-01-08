@@ -5,7 +5,6 @@
     <title>read</title>
 </head>
 <body>
-<h1>게시글 하나를 나타내줍니다.</h1>
 <th:div th:switch="${article.board}">
     <p th:case="1">게시판 : 자유</p>
     <p th:case="2">게시판 : 개발</p>
@@ -14,24 +13,30 @@
 </th:div>
 
 
-<p>[[${article.title}]]</p>
-<p>[[${article.contents}]]</p>
+<p>제목 : [[${article.title}]]</p>
+<p>내용 : [[${article.contents}]]</p>
 
-<h1>댓글도 나타내줍니다.</h1>
-
+<h1>-------------------------------------------------</h1>
+<div>
+    <form th:action="@{/article/{id}/comment(id=${article.id})}" method="post">
+        <textarea id="contents" name="contents" rows="5" cols="50" required></textarea>
+        비밀번호<input type="password" id="createCommentPwd" name="createCommentPwd" required>
+        <input type="submit" value="댓글작성">
+    </form>
+</div>
 <div th:if="${commentList.isEmpty()}">
     댓글이 없습니다.
 </div>
 <div th:unless="${commentList.isEmpty()}" th:each="comment : ${commentList}">
     <p>[[${comment.contents}]]</p>
-    <form th:action="@{/article/{id}(id=${article.id})/comment/{id}(id=${comment.id})/delete}" method="post">
-        삭제비밀번호<input type="password" id="commentPwd" name="password" required>
+    <form th:action="@{/article/{id}/comment/{cid}/delete(id = ${article.id}, cid = ${comment.id})}" method="post">
+        댓글삭제비밀번호<input type="password" id="deleteCommentPwd" name="deleteCommentPwd" required>
         <input type="submit" value="댓글 삭제">
     </form>
 </div>
 <p><a href="/boards">홈으로</a> | <a th:href="@{/article/{id}/update-view(id=${article.id})}">글 수정</a></p>
 <form th:action="@{/article/{id}/delete(id=${article.id})}" method="post">
-    삭제비밀번호<input type="password" id="articlePwd" name="articlePwd" required>
+    글삭제비밀번호<input type="password" id="articlePwd" name="articlePwd" required>
     <input type="submit" value="게시글 삭제">
 </form>
 </body>

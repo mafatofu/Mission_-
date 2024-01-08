@@ -98,18 +98,37 @@ public class ArticleController {
     /*****************댓글*****************/
 
     //TODO 댓글 작성
-    @GetMapping("/{articleId}/comment")
+    @PostMapping("/{articleId}/comment")
     public String createComment
     (
-            @PathVariable Long articleId
+            @PathVariable Long articleId,
+            @RequestParam String contents,
+            @RequestParam String createCommentPwd
     ) {
-        return "redirect:/"+articleId;
+        Article article = articleService.showArticle(articleId);
+
+        commentService.createComment(article,contents,createCommentPwd);
+        return "redirect:/article/"+articleId;
     }
     //TODO 댓글 삭제
     //비번받음
     @PostMapping("/{articleId}/comment/{commentId}/delete")
-    public String deleteComment(){
-        return "redirect:/boards";
+    public String deleteComment
+    (
+            @PathVariable Long articleId,
+            @PathVariable Long commentId,
+            @RequestParam String deleteCommentPwd
+    ) {
+        Comment comment = commentService.showComment(commentId);
+
+        //패스워드가 일치할 시
+        if(deleteCommentPwd.equals(comment.getPassword())){
+            //댓글 삭제
+            commentService.deleteComments(commentId);
+            return "redirect:/article/"+ articleId;
+        } else
+            return "redirect:/article/"+articleId;
+
     }
 
 }
