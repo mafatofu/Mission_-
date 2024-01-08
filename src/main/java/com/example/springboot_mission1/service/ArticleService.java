@@ -58,4 +58,14 @@ public class ArticleService {
         repository.deleteById(articleId);
     }
     //게시글수정
+
+    public void updateArticle(Long articleId, Long board, String title, String contents, String newPwd){
+        Article article = showArticle(articleId);
+        article.setBoard(board);
+        article.setTitle(title);
+        article.setContents(contents);
+        article.setPassword(newPwd);
+        repository.save(article);
+    }
+
 }

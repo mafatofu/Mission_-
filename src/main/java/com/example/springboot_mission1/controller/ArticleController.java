@@ -53,12 +53,25 @@ public class ArticleController {
     @PostMapping("/{articleId}/update")
     public String updateArticle
     (
-            @PathVariable Long articleId
-            //TODO 여기서부터
-
+            @PathVariable Long articleId,
+            @RequestParam Long board,
+            @RequestParam String title,
+            @RequestParam String contents,
+            @RequestParam String usedPwd,
+            @RequestParam String newPwd
     ){
-        System.out.println("aaaa");
-        return "redirect:/"+articleId;
+        //비밀번호체크
+        Article article = articleService.showArticle(articleId);
+        //기존 비밀번호와 새로 입력한 비밀번호 일치여부 체크
+        if(usedPwd.equals(article.getPassword())){
+            articleService.updateArticle(articleId,board,title,contents,newPwd);
+            //일치하면 게시글 페이지
+            return "redirect:/article/"+articleId;
+        } else{
+            //비번틀리면 다시 수정페이지
+            return "redirect:/article/"+articleId+"/update-view";
+        }
+
     }
     //게시글 삭제
     //TODO 게시글이 삭제되면 연관된 댓글들도 삭제
