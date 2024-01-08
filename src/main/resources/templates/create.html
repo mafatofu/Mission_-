@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 작성</title>
+</head>
+<body>
+<h1>게시글 작성하기</h1>
+    <form action="/boards/create" method="post">
+        <div>
+            <select name="board" id="board" required>
+                <option value="">--게시판 선택--</option>
+                <option value="1">자유</option>
+                <option value="2">개발</option>
+                <option value="3">일상</option>
+                <option value="4">사건사고</option>
+            </select>
+        </div>
+        <div>
+            제목 : <input type="text" id="title" name="title" required>
+        </div>
+        <div>
+            내용 : <textarea id="contents" name="contents" rows="30" cols="100" required></textarea>
+        </div>
+        <div>
+            비밀번호 : <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <input type="submit" value="등록">
+        </div>
+
+    </form>
+</body>
+</html>

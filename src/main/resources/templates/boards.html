@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>board</title>
+</head>
+<body>
+<h1>익명게시판 홈</h1>
+<p>
+    <a th:href="@{/boards}">전체 게시판</a> |
+    <a th:href="@{/boards/{id}(id=1)}">자유 게시판</a> |
+    <a th:href="@{/boards/{id}(id=2)}">개발 게시판</a> |
+    <a th:href="@{/boards/{id}(id=3)}">일상 게시판</a> |
+    <a th:href="@{/boards/{id}(id=4)}">사건사고 게시판</a>
+</p>
+
+<div th:if="${articleList.isEmpty()}">
+    <p>글이 없습니다.</p>
+</div>
+
+<!--board에 따라 보여주는 글이 다르도록 구현-->
+<div th:unless="${articleList.isEmpty()}" th:each="article: ${articleList}">
+    <p>[[${article.id}]] <a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]] [[${article.contents}]]</a></p>
+</div>
+</div>
+<a href="/boards/create-view">글쓰기</a>
+</body>
+</html>

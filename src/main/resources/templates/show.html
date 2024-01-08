@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>read</title>
+</head>
+<body>
+<h1>게시글 하나를 나타내줍니다.</h1>
+<th:div th:switch="${article.board}">
+    <p th:case="1">게시판 : 자유</p>
+    <p th:case="2">게시판 : 개발</p>
+    <p th:case="3">게시판 : 일상</p>
+    <p th:case="4">게시판 : 사건사고</p>
+</th:div>
+
+
+<p>[[${article.title}]]</p>
+<p>[[${article.contents}]]</p>
+
+<h1>댓글도 나타내줍니다.</h1>
+
+<div th:if="${commentList.isEmpty()}">
+    댓글이 없습니다.
+</div>
+<div th:unless="${commentList.isEmpty()}" th:each="comment : ${commentList}">
+    <p>[[${comment.contents}]]</p>
+    <form th:action="@{/article/{id}(id=${article.id})/comment/{id}(id=${comment.id})/delete}" method="post">
+        삭제비밀번호<input type="password" id="commentPwd" name="password" required>
+        <input type="submit" value="댓글 삭제">
+    </form>
+</div>
+<p><a href="/boards">홈으로</a> | <a th:href="@{/article/{id}/update-view(id=${article.id})}">글 수정</a></p>
+<form th:action="@{/article/{id}/delete(id=${article.id})}" method="post">
+    삭제비밀번호<input type="password" id="articlePwd" name="articlePwd" required>
+    <input type="submit" value="게시글 삭제">
+</form>
+</body>
+</html>

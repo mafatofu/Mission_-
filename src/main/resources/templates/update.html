@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>update</title>
+</head>
+<body>
+<h1>글수정페이지입니다.</h1>
+    <form th:action="@{/article/{id}/update(id=${article.id})}" method="post">
+        <div>
+            <select name="board" id="board" required>
+                <th:div th:switch="${article.board}">
+                    <option th:case="1" value="1">기존게시판 : 자유</option>
+                    <option th:case="2" value="2">기존게시판 : 개발</option>
+                    <option th:case="3" value="3">기존게시판 : 일상</option>
+                    <option th:case="4" value="4">기존게시판 : 사건사고</option>
+                </th:div>
+                <option value="1">자유</option>
+                <option value="2">개발</option>
+                <option value="3">일상</option>
+                <option value="4">사건사고</option>
+            </select>
+        </div>
+        <div>
+            제목 : <input type="text" id="title" name="title" th:value="${article.title}" required>
+        </div>
+        <div>
+            내용 : <textarea id="contents" name="contents" rows="30" cols="100" required>[[${article.contents}]]</textarea>
+        </div>
+        <div>
+            기존 비밀번호 : <input type="password" id="usedPwd" name="password" required>
+        </div>
+        <div>
+            새로운 비밀번호 : <input type="password" id="newPwd" name="password" required>
+        </div>
+
+        <div>
+            <input type="submit" value="수정">
+        </div>
+
+    </form>
+<a th:href="@{/article/{id}(id=${article.id})}">뒤로가기</a>
+<a href="/boards">홈으로</a>
+</body>
+</html>
