@@ -12,5 +12,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     //List<Comment> findAllByArticle(Long articleId);
     //List<Comment> findByArticle_id(Long articleId);
     List<Comment> findAllByArticleId(Long articleId);
-
+    //게시글에 관련된 댓글 삭제
+    void deleteAllByArticleId(Long articleId);
+    //void deleteCommentByArticleId(Long articleId);
 }

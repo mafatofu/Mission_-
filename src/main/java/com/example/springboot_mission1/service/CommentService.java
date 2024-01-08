@@ -21,4 +21,10 @@ public class CommentService {
     }
     //댓글추가
     //댓글삭제
+    public void deleteComments(Long articleId){
+        //delete from article_comment_list where article_id=?
+        //repository.deleteAllByArticleId(articleId);
+
+        //repository.deleteCommentByArticleId(articleId);
+    }
 }

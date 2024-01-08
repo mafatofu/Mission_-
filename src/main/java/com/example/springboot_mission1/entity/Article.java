@@ -23,7 +23,7 @@ public class Article {
 
     //하나의 글에는 여러 댓글이 달릴 수 있다.
     //그냥 파이널로 한번 생생해서 쭉 쓰는게 편해보임
-    @OneToMany
+    @OneToMany(mappedBy ="article", orphanRemoval = true)
     private final List<Comment> commentList = new ArrayList<>();
 
     public Article(Long id, String title, String contents, String password, Long board) {
