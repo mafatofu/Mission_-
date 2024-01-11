@@ -67,5 +67,25 @@ public class ArticleService {
         article.setPassword(newPwd);
         repository.save(article);
     }
+    
+
+    // 게시판 게시글 검색
+    //전체게시판 제목검색
+    public List<Article> selectArticlesAllByTitle(String title){
+        //제목으로 전체게시판 검색
+        return repository.findAllByTitleContainingOrderByIdDesc(title);
+    }
+    //전체게시판 내용검색
+    public List<Article> selectArticlesAllByContents(String contents){
+        return repository.findAllByContentsContainingOrderByIdDesc(contents);
+    }
+    //개별게시판 제목검색
+    public List<Article> selectArticlesByBoardAndTitle(Long board, String title){
+        return repository.findByBoardAndTitleContainingOrderByIdDesc(board, title);
+    }
+    //개별게시판 내용검색
+    public List<Article> selectArticlesByBoardAndContents(Long board, String contents){
+        return repository.findByBoardAndContentsContainingOrderByIdDesc(board, contents);
+    }
 
 }

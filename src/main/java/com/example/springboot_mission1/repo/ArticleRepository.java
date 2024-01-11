@@ -10,6 +10,14 @@ import java.util.List;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findByBoard(Long board);
     List<Article> findAllByBoardOrderByIdDesc(Long board);
-    //패스워드확인
-    //Article findByIdAndPassword(Long id, String password);
+
+    //검색쿼리
+    //전체게시판 제목으로 조회
+    List<Article> findAllByTitleContainingOrderByIdDesc(String title);
+    //전체게시판 내용으로 조회
+    List<Article> findAllByContentsContainingOrderByIdDesc(String contents);
+    //개별게시판 제목으로 조회
+    List<Article> findByBoardAndTitleContainingOrderByIdDesc(Long board, String title);
+    //개별게시판 내용으로 조회
+    List<Article> findByBoardAndContentsContainingOrderByIdDesc(Long board, String contents);
 }
