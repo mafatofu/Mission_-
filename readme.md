@@ -86,8 +86,8 @@
 <img src="readmeImg/comment1.JPG" width="50%">  
 ### 8. 댓글 삭제
 게시글 보기 페이지 하단의 댓글 삭제 버튼 이용.
-- 댓글 생성 시 입력한 비밀번호와 일치하면 삭제 / 불일치 시 삭제 안됨
-<img src="readmeImg/comment2.JPG" width="50%">
+- 댓글 생성 시 입력한 비밀번호와 일치하면 삭제 / 불일치 시 삭제 안됨  
+  <img src="readmeImg/comment2.JPG" width="50%">
 --- 
 ### 진행중 발생한 어려움에 대한 기록.
    - 시작을 어떻게 해야할지 어려웠다.  
