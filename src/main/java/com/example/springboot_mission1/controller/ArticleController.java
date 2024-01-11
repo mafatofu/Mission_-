@@ -88,7 +88,7 @@ public class ArticleController {
         if(articlePwd.equals(article.getPassword())){
             articleService.deleteArticle(articleId);
             //commentService.deleteComments(articleId);
-            return "redirect:/boards";
+            return "redirect:/boards/0";
         } else{
             return "redirect:/article/"+articleId;
         }

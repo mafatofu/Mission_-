@@ -34,7 +34,7 @@
         <input type="submit" value="댓글 삭제">
     </form>
 </div>
-<p><a href="/boards">홈으로</a> | <a th:href="@{/article/{id}/update-view(id=${article.id})}">글 수정</a></p>
+<p><a href="/boards/0">홈으로</a> | <a th:href="@{/article/{id}/update-view(id=${article.id})}">글 수정</a></p>
 <form th:action="@{/article/{id}/delete(id=${article.id})}" method="post">
     글삭제비밀번호<input type="password" id="articlePwd" name="articlePwd" required>
     <input type="submit" value="게시글 삭제">
